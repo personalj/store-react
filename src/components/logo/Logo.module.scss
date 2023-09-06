@@ -1,0 +1,8 @@
+@import "../../styles/vars";
+.logo {
+  font-weight: bold;
+  color: $black-100;
+  &_light {
+    color: $white-100;
+  }
+}

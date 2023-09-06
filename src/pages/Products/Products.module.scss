@@ -1,0 +1,18 @@
+.info {
+  display: flex;
+  flex-wrap: wrap;
+  &__aside {
+    width: 25%;
+    max-width: 300px;
+    padding-right: 20px;
+    @media screen and (max-width: 768px) {
+      width: 100%;
+    }
+  }
+  &__main {
+    width: 75%;
+    @media screen and (max-width: 768px) {
+      width: 100%;
+    }
+  }
+}

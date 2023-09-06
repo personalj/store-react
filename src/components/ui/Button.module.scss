@@ -1,0 +1,15 @@
+@import "../../styles/vars";
+
+.btn {
+  border-radius: 30px;
+  font-size: 14px;
+  text-align: center;
+  padding: 7px 15px;
+  cursor: pointer;
+  border: 1px solid $black-100;
+  transition: all .3s ease;
+  background: transparent;
+  &:hover {
+    transform: translateY(-3px);
+  }
+}

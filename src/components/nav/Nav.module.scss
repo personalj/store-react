@@ -1,0 +1,26 @@
+@import "../../styles/vars";
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 600px;
+  padding: 0;
+  margin: 0 auto;
+  &_light {
+    color: $white-100;
+  }
+  &__item {
+    padding: 0 10px;
+  }
+  &__link {
+    font-size: 14px;
+    transition: all  .3s ease;
+    display: block;
+    &:hover {
+      transform: translateY(-5px);
+    }
+    &_active {
+      font-weight: bold;
+    }
+  }
+}

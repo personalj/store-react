@@ -1,0 +1,44 @@
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -10px 70px;
+  &__item {
+    padding: 0 10px;
+    width: 100%;
+    display: flex;justify-content: center;
+    margin-bottom: 10px;
+  }
+}
+
+.cols-2x {
+  width: 50%;
+  @media screen and (max-width: 568px) {
+    width: 100%;
+  }
+}
+.cols-4x {
+  width: 25%;
+  @media screen and (max-width: 568px) {
+    width: 100%;
+  }
+}
+
+.columns {
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  @media screen and (max-width: 568px) {
+   display: none;
+  }
+  &__item {
+    cursor: pointer;
+    transition: all .3s ease;
+    &:hover {
+      transform: translateY(-3px);
+    }
+    &_active {
+      font-weight: bold;
+    }
+  }
+}
