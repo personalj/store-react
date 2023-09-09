@@ -1,15 +1,21 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { RootState } from '../index.ts';
-import movieApi from '../../services/api/storeApi.ts';
-import { CategoryState } from '../../types/slices/category.ts';
+import { AxiosError } from 'axios';
+import api from '../../services/api/storeApi.ts';
+
+interface CategoryState {
+  loading: boolean;
+  error: string;
+  categories: string[];
+}
 
 export const fetchAsyncCategories = createAsyncThunk('categories/fetchAsyncCategories', async (_, thunkAPI) => {
   try {
-    const response = await movieApi.get('/products/categories');
+    const response = await api.get('/products/categories');
     return response.data;
   } catch (e) {
-    return thunkAPI.rejectWithValue('Error api response');
+    const err = e as AxiosError;
+    return thunkAPI.rejectWithValue(err?.message);
   }
 });
 
@@ -44,12 +50,5 @@ const categorySlice = createSlice({
 });
 
 export const { removeCategories } = categorySlice.actions;
-
-// Other code such as selectors can use the imported `RootState` type
-export const categories = (state: RootState) => state.categories;
-
-export const loading = (state: RootState) => state.categories.loading;
-
-export const error = (state: RootState) => state.categories.error;
 
 export default categorySlice.reducer;

@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import classes from './Footer.module.scss';
 import Logo from '../logo/Logo.tsx';
 import Nav from '../nav/Nav.tsx';
+import classes from './Footer.module.scss';
 
 const Footer: FC = () => {
   return (

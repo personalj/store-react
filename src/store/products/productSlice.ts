@@ -1,17 +1,20 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { RootState } from '../index.ts';
-import { Product } from '../../types/product.ts';
-import { ProductState } from '../../types/slices/product.ts';
-import movieApi from '../../services/api/storeApi.ts';
+import { AxiosError } from 'axios';
+import { Product } from '../../store/products/types.ts';
+import api from '../../services/api/storeApi.ts';
 
+interface ProductState {
+  loading: boolean;
+  error: string;
+  products: Product[];
+  product: null | Product;
+}
 export const fetchAsyncProducts = createAsyncThunk(
   'products/fetchAsyncProducts',
   async (categorySlug: string | null, thunkAPI) => {
     try {
-      const response = categorySlug
-        ? await movieApi.get(`/products/category/${categorySlug}`)
-        : await movieApi.get(`/products`);
+      const response = categorySlug ? await api.get(`/products/category/${categorySlug}`) : await api.get(`/products`);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue('Error api response');
@@ -21,10 +24,11 @@ export const fetchAsyncProducts = createAsyncThunk(
 
 export const fetchAsyncProduct = createAsyncThunk('products/fetchAsyncProduct', async (id: string, thunkAPI) => {
   try {
-    const response = await movieApi.get(`/products/${id}`);
+    const response = await api.get(`/products/${id}`);
     return response.data;
   } catch (e) {
-    return thunkAPI.rejectWithValue('Error api response');
+    const err = e as AxiosError;
+    return thunkAPI.rejectWithValue(err?.message);
   }
 });
 
@@ -75,14 +79,5 @@ const productSlice = createSlice({
 });
 
 export const { removeProducts, removeProduct } = productSlice.actions;
-
-// Other code such as selectors can use the imported `RootState` type
-export const products = (state: RootState) => state.products.products;
-
-export const product = (state: RootState) => state.products.product;
-
-export const loading = (state: RootState) => state.products.loading;
-
-export const error = (state: RootState) => state.products.error;
 
 export default productSlice.reducer;

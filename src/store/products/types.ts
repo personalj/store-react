@@ -1,4 +1,7 @@
-import { Rating } from './rating.ts';
+export interface Rating {
+  rate: number;
+  count: number;
+}
 export interface Product {
   id: number;
   title: string;

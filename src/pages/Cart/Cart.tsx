@@ -5,10 +5,11 @@ import { clearCartList } from '../../store/cart/cartSlice.ts';
 import { useCartTotalQuantity } from '../../hooks/useGetCartTotal.ts';
 import Main from '../../layouts/Main.tsx';
 import CartItem from '../../components/cart/CartItem.tsx';
-import classes from './Cart.module.scss';
 import Button from '../../components/ui/Button.tsx';
+import { getCartProducts } from '../../store/cart/selectors.ts';
+import classes from './Cart.module.scss';
 const Cart: FC = () => {
-  const { cartList } = useAppSelector((state) => state.cart);
+  const cartList = useAppSelector(getCartProducts);
   const dispatch = useAppDispatch();
   const { roundedTotalPrice } = useCartTotalQuantity(cartList);
 

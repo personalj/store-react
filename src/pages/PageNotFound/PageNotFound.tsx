@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import classes from './PageNotFound.module.scss';
 import Main from '../../layouts/Main.tsx';
+import classes from './PageNotFound.module.scss';
 
 const PageNotFound: FC = () => {
   return (

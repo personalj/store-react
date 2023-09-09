@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { Product } from '../../types/product.ts';
+import { Product } from '../../store/products/types.ts';
 import { useAppDispatch } from '../../hooks/redux.ts';
 import { incrementCartItem, decrementCartItem, deleteFromCart } from '../../store/cart/cartSlice.ts';
 import Button from '../ui/Button.tsx';
