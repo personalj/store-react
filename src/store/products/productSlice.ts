@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
-import { Product } from '../../store/products/types.ts';
+import { Product } from './types.ts';
 import api from '../../services/api/storeApi.ts';
 
 interface ProductState {

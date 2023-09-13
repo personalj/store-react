@@ -1,4 +1,4 @@
-export const routes = {
+export const ROUTES = {
   index: '/',
   catalog: '/catalog',
   product: '/product/:id',
