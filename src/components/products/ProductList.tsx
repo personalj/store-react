@@ -1,6 +1,7 @@
 import { FC, useState } from 'react';
 import { useAppSelector } from '../../hooks/redux.ts';
 import ProductItem from '../products/ProductItem.tsx';
+import { getProducts } from '../../store/products/selectors.ts';
 import classes from './ProductList.module.scss';
 
 interface Columns {
@@ -8,7 +9,7 @@ interface Columns {
   value: string;
 }
 const ProductList: FC = () => {
-  const { products } = useAppSelector((state) => state.products);
+  const products = useAppSelector(getProducts);
   const columns: Columns[] = [
     { cols: '|', value: '' },
     { cols: '||', value: 'cols-2x' },

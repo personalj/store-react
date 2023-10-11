@@ -2,9 +2,10 @@ import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { setToCart } from '../../store/cart/cartSlice.ts';
 import { useAppDispatch } from '../../hooks/redux.ts';
-import { Product } from '../../types/product.ts';
-import classes from './ProductItem.module.scss';
+import { Product } from '../../store/products/types.ts';
 import Button from '../ui/Button.tsx';
+import classes from './ProductItem.module.scss';
+
 interface ChildProps {
   product: Product;
 }

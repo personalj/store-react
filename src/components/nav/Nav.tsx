@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import classes from './Nav.module.scss';
+
 type Props = {
   styled?: string;
 };

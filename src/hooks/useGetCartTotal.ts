@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Product } from '../types/product.ts';
+import { Product } from '../store/products/types.ts';
 
 interface CartTotals {
   roundedTotalPrice: number;

@@ -1,12 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { RootState } from '../index.ts';
-import { CartState } from '../../types/slices/cart.ts';
-import { Product } from '../../types/product.ts';
-import { useLocalStorage, getStorageValue } from '../../hooks/useLocalStorage.ts';
+import { Product } from '../products/types.ts';
+import { getStorageValue, setToLocalStorage } from '../../utils/localStorage.ts';
+import { CART_STORAGE_KEY } from "../../consts";
+
+interface CartState {
+  cartList: Product[];
+}
 
 const initialState: CartState = {
-  cartList: getStorageValue('cart', []),
+  cartList: getStorageValue(CART_STORAGE_KEY, []),
 };
 
 const cartSlice = createSlice({
@@ -15,7 +18,7 @@ const cartSlice = createSlice({
   reducers: {
     clearCartList: (state) => {
       state.cartList = [];
-      useLocalStorage('cart', []);
+      setToLocalStorage(CART_STORAGE_KEY, []);
     },
     setToCart: (state, action: PayloadAction<Product>) => {
       const product = action.payload;
@@ -23,31 +26,29 @@ const cartSlice = createSlice({
       itemFound && itemFound.quantity && product.quantity
         ? (itemFound.quantity += product.quantity)
         : state.cartList.unshift(product);
-      useLocalStorage('cart', state.cartList);
+      setToLocalStorage(CART_STORAGE_KEY, state.cartList);
     },
     deleteFromCart: (state, action: PayloadAction<number>) => {
       state.cartList = state.cartList.filter((item) => item.id !== action.payload);
-      useLocalStorage('cart', state.cartList);
+      setToLocalStorage(CART_STORAGE_KEY, state.cartList);
     },
     incrementCartItem: (state, action: PayloadAction<number>) => {
       const item = state.cartList.find((item) => item.id === action.payload);
       if (item?.quantity) {
         item.quantity++;
       }
-      useLocalStorage('cart', state.cartList);
+      setToLocalStorage(CART_STORAGE_KEY, state.cartList);
     },
     decrementCartItem: (state, action: PayloadAction<number>) => {
       const item = state.cartList.find((item) => item.id === action.payload);
       if (item?.quantity && item?.quantity > 1) {
         item.quantity--;
       }
-      useLocalStorage('cart', state.cartList);
+      setToLocalStorage(CART_STORAGE_KEY, state.cartList);
     },
   },
 });
 
 export const { clearCartList, setToCart, deleteFromCart, incrementCartItem, decrementCartItem } = cartSlice.actions;
-
-export const cartProducts = (state: RootState) => state.cart.cartList;
 
 export default cartSlice.reducer;
